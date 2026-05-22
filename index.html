@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MÁS QUE TECNOLOGÍA | Estrella - Accesorios Tech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --pastel-pink: #fdf2f8;
+            --soft-pink: #fce7f3;
+            --accent-pink: #f9a8d4;
+            --whatsapp-green: #25D366;
+            --whatsapp-dark: #128C7E;
+            --facebook-blue: #1877F2;
+            --instagram-gradient: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+            --tiktok-black: #010101;
+        }
+
+        body { 
+            font-family: 'Quicksand', sans-serif; 
+            background-color: var(--pastel-pink);
+            overflow-x: hidden;
+            color: #831843;
+            scroll-behavior: smooth;
+        }
+
+        /* Burbujas de fondo */
+        .bubble-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -150px;
+            background: radial-gradient(circle at 30% 30%, white, rgba(255, 182, 193, 0.4));
+            border-radius: 50%;
+            animation: rise 12s infinite ease-in;
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            20% { opacity: 0.9; }
+            100% { transform: translateY(-130vh) scale(1.4); opacity: 0; }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            border-radius: 2.5rem;
+        }
+
+        /* --- REDES SOCIALES FLOTANTES --- */
+        .social-sidebar {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1001;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1) translateX(5px);
+        }
+
+        .bg-facebook { background-color: var(--facebook-blue); }
+        .bg-instagram { background: var(--instagram-gradient); }
+        .bg-tiktok { background-color: var(--tiktok-black); }
+
+        /* --- CHAT BOT INTELIGENTE --- */
+        .chat-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .chat-window {
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            margin-bottom: 15px;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .chat-header {
+            background: var(--whatsapp-dark);
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chat-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid white;
+            object-fit: cover;
+        }
+
+        .chat-body {
+            background: #e5ddd5;
+            padding: 15px;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .msg {
+            max-width: 80%;
+            padding: 8px 12px;
+            font-size: 14px;
+            line-height: 1.4;
+            position: relative;
+        }
+
+        .msg-bot {
+            background: white;
+            align-self: flex-start;
+            border-radius: 0 15px 15px 15px;
+            color: #333;
+        }
+
+        .msg-user {
+            background: #dcf8c6;
+            align-self: flex-end;
+            border-radius: 15px 0 15px 15px;
+            color: #333;
+        }
+
+        .chat-footer {
+            padding: 10px;
+            background: #f0f0f0;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .chat-btn {
+            background: var(--whatsapp-green);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            transition: 0.2s;
+        }
+
+        .chat-btn:hover { transform: scale(1.1); }
+
+        .chat-toggle {
+            width: 65px;
+            height: 65px;
+            background: var(--whatsapp-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 18px;
+            height: 18px;
+            background: #ff3b3b;
+            border: 2px solid white;
+            border-radius: 50%;
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 59, 59, 0.7); }
+            70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(255, 59, 59, 0); }
+            100% { transform: scale(1); }
+        }
+
+        .dot-flashing {
+            position: relative;
+            width: 6px;
+            height: 6px;
+            border-radius: 5px;
+            background-color: #999;
+            color: #999;
+            animation: dot-flashing 1s infinite linear alternate;
+            animation-delay: .5s;
+            display: inline-block;
+            margin-left: 15px;
+        }
+        @keyframes dot-flashing {
+            0% { background-color: #999; }
+            50%, 100% { background-color: #ebe6ff; }
+        }
+
+        /* Contenedor del video responsivo */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(244, 114, 182, 0.2);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        section { scroll-margin-top: 100px; }
+    </style>
+</head>
+<body class="selection:bg-pink-200">
+
+    <div class="bubble-container" id="bubbles"></div>
+
+    <!-- Redes Sociales Flotantes -->
+    <div class="social-sidebar">
+        <a href="https://facebook.com" target="_blank" class="social-icon bg-facebook" title="Facebook - Mas que Tecnología">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" class="social-icon bg-instagram" title="Instagram - Mas que Tecnología">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://tiktok.com" target="_blank" class="social-icon bg-tiktok" title="TikTok - Mas que Tecnología">
+            <i class="fab fa-tiktok"></i>
+        </a>
+    </div>
+
+    <!-- Chat Bot Inteligente -->
+    <div class="chat-container">
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <img src="https://lh3.googleusercontent.com/d/1hzuI__Nr154oS1XLw2AZmJntvLp18Dxp" alt="Estrella">
+                <div>
+                    <h4 class="font-bold text-sm">Estrella ✨</h4>
+                    <p class="text-xs opacity-80">Asistente Virtual</p>
+                </div>
+                <button onclick="toggleChat()" class="ml-auto text-white opacity-70 hover:opacity-100">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-body" id="chatBody">
+                <div class="msg msg-bot">
+                    ¡Hola! Soy el asistente de Estrella. ¿Tienes alguna duda sobre nuestros productos tech? ✨
+                </div>
+            </div>
+            <div id="typingIndicator" class="px-4 py-1 flex items-center bg-[#e5ddd5]" style="display: none;">
+                <span class="text-xs text-gray-600 mr-2">Estrella está escribiendo</span>
+                <div class="dot-flashing"></div>
+            </div>
+            <div class="chat-footer">
+                <input type="text" id="userInput" class="chat-input" placeholder="Escribe tu mensaje..." onkeypress="if(event.key==='Enter') sendMessage()">
+                <button onclick="sendMessage()" class="chat-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+                <button onclick="contactWhatsApp()" class="chat-btn" style="background-color: #128C7E;" title="Hablar con Estrella">
+                    <i class="fab fa-whatsapp"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="chat-toggle" onclick="toggleChat()">
+            <i class="fab fa-whatsapp"></i>
+            <div class="notification-dot" id="dot"></div>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <nav class="sticky top-4 z-50 mx-4 lg:mx-auto max-w-6xl">
+        <div class="glass-card px-8 py-4 flex justify-between items-center shadow-xl shadow-pink-200/40">
+            <span class="text-xl md:text-2xl font-bold text-pink-600 uppercase">
+                MÁS QUE <span class="text-pink-400">TECNOLOGÍA</span>
+            </span>
+            <div class="hidden md:flex space-x-8 font-bold text-pink-500">
+                <a href="#inicio" class="hover:text-pink-700 transition">Inicio</a>
+                <a href="#video-destacado" class="hover:text-pink-700 transition">Ver Demo</a>
+                <a href="#productos" class="hover:text-pink-700 transition">Tienda</a>
+                <a href="#sobre-mi" class="hover:text-pink-700 transition">Sobre Mí</a>
+            </div>
+            <button onclick="toggleChat()" class="bg-pink-300 text-white px-6 py-2 rounded-full font-bold shadow-md hover:scale-105 transition">
+                Chat Estrella
+            </button>
+        </div>
+    </nav>
+
+    <!-- Inicio -->
+    <header id="inicio" class="max-w-7xl mx-auto px-6 py-20">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+                <h1 class="text-6xl font-bold text-pink-900 leading-tight">Accesorios que hacen brillar tu día</h1>
+                <p class="text-xl text-pink-700/80">Soy Estrella, y selecciono personalmente los mejores gadgets tech con el estilo que te encanta.</p>
+                <div class="flex gap-4">
+                    <a href="#productos" class="inline-block bg-white text-pink-500 px-10 py-4 rounded-3xl font-bold shadow-lg hover:bg-pink-50 transition">Ver Tienda ✨</a>
+                    <a href="#video-destacado" class="inline-block bg-pink-100 text-pink-600 px-8 py-4 rounded-3xl font-bold shadow-sm hover:bg-pink-200 transition">Ver Demo 🎬</a>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="glass-card p-4">
+                    <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&q=80&w=800" class="rounded-[2rem] w-full" alt="Tech setup aesthetic">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sección del Video Destacado -->
+    <section id="video-destacado" class="py-16 bg-white/20 backdrop-blur-sm">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="glass-card p-6 md:p-10 shadow-2xl border-pink-100 text-center space-y-6">
+                <div class="inline-block px-4 py-1.5 bg-pink-100 text-pink-600 rounded-full font-bold text-sm tracking-wide uppercase">
+                    🎥 En Acción
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-pink-900">Nuestros Accesorios en Acción ✨</h2>
+                <p class="text-pink-700/80 max-w-xl mx-auto">
+                    Echa un vistazo a la calidad, el diseño y lo hermosos que se ven nuestros productos en el día a día.
+                </p>
+                
+                <!-- Reproductor de Google Drive incrustado de forma responsiva -->
+                <div class="video-container">
+                    <iframe src="https://drive.google.com/file/d/1UpK6LxYk2Ezg0KGtuNm8_950TaK-dsU7/preview" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                
+                <div class="pt-2">
+                    <a href="https://drive.google.com/file/d/1UpK6LxYk2Ezg0KGtuNm8_950TaK-dsU7/view?usp=sharing" target="_blank" class="inline-flex items-center gap-2 bg-white text-pink-600 px-6 py-2.5 rounded-full font-bold text-sm shadow-md hover:scale-105 transition-all">
+                        <i class="fas fa-external-link-alt"></i> Ver en pantalla completa
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Mí -->
+    <section id="sobre-mi" class="py-20 bg-white/40">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="glass-card p-10 flex flex-col md:flex-row items-center gap-10">
+                <img src="https://lh3.googleusercontent.com/d/1hzuI__Nr154oS1XLw2AZmJntvLp18Dxp" class="w-64 h-64 rounded-[2rem] object-cover border-8 border-white shadow-xl" alt="Estrella">
+                <div class="space-y-4">
+                    <h2 class="text-4xl font-bold text-pink-900">Sobre mí</h2>
+                    <p class="text-pink-800 leading-relaxed italic">"Hola! Soy Estrella, fundadora de Más que Tecnología. Mi misión es traerte accesorios tecnológicos en Bolivia que sean funcionales y estéticamente hermosos."</p>
+                    <div class="flex gap-3">
+                        <span class="bg-pink-100 text-pink-600 px-4 py-1 rounded-full text-sm font-bold">Santa Cruz, Bolivia</span>
+                        <span class="bg-pink-100 text-pink-600 px-4 py-1 rounded-full text-sm font-bold">Aesthetic Tech</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos -->
+    <section id="productos" class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-pink-900 mb-16 uppercase">Favoritos de la Semana</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Tarjeta Producto 1 -->
+                <div class="glass-card p-6 group">
+                    <div class="overflow-hidden rounded-2xl h-60 mb-4 bg-white">
+                        <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition" alt="Funda Aesthetic">
+                    </div>
+                    <h3 class="font-bold text-xl text-pink-900">Funda Protectora</h3>
+                    <p class="text-pink-400 font-bold text-2xl mt-2">Bs. 90</p>
+                    <button onclick="toggleChat()" class="w-full mt-4 bg-pink-300 text-white py-3 rounded-xl font-bold hover:bg-pink-400 transition">Preguntar por WhatsApp</button>
+                </div>
+                
+                <!-- Tarjeta Producto 2 -->
+                <div class="glass-card p-6 group">
+                    <div class="overflow-hidden rounded-2xl h-60 mb-4 bg-white">
+                        <img src="https://images.unsplash.com/photo-1615526675159-e248c3021d3f?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition" alt="Cargador">
+                    </div>
+                    <h3 class="font-bold text-xl text-pink-900">Cargador Rápido</h3>
+                    <p class="text-pink-400 font-bold text-2xl mt-2">Bs. 145</p>
+                    <button onclick="toggleChat()" class="w-full mt-4 bg-pink-300 text-white py-3 rounded-xl font-bold hover:bg-pink-400 transition">Preguntar por WhatsApp</button>
+                </div>
+
+                <!-- Tarjeta Producto 3 -->
+                <div class="glass-card p-6 group">
+                    <div class="overflow-hidden rounded-2xl h-60 mb-4 bg-white">
+                        <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition" alt="Audífonos">
+                    </div>
+                    <h3 class="font-bold text-xl text-pink-900">Audífonos Pro</h3>
+                    <p class="text-pink-400 font-bold text-2xl mt-2">Bs. 210</p>
+                    <button onclick="toggleChat()" class="w-full mt-4 bg-pink-300 text-white py-3 rounded-xl font-bold hover:bg-pink-400 transition">Preguntar por WhatsApp</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-10 text-center text-pink-400 font-bold">
+        MÁS QUE TECNOLOGÍA • ESTRELLA • 2026
+    </footer>
+
+    <script>
+        const apiKey = ""; // API Key de Gemini
+        let chatHistory = [];
+
+        // Burbujas
+        function createBubbles() {
+            const container = document.getElementById('bubbles');
+            for (let i = 0; i < 20; i++) {
+                const b = document.createElement('div');
+                b.className = 'bubble';
+                const s = Math.random() * 80 + 20 + 'px';
+                b.style.width = b.style.height = s;
+                b.style.left = Math.random() * 100 + 'vw';
+                b.style.animationDuration = Math.random() * 10 + 5 + 's';
+                b.style.animationDelay = Math.random() * 10 + 's';
+                container.appendChild(b);
+            }
+        }
+
+        // Lógica del Chat
+        function toggleChat() {
+            const win = document.getElementById('chatWindow');
+            const dot = document.getElementById('dot');
+            if (win.style.display === 'flex') {
+                win.style.display = 'none';
+            } else {
+                win.style.display = 'flex';
+                dot.style.display = 'none';
+            }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const chatBody = document.getElementById('chatBody');
+            const typingIndicator = document.getElementById('typingIndicator');
+            const userMsg = input.value.trim();
+
+            if (!userMsg) return;
+
+            addMessage(userMsg, 'user');
+            input.value = '';
+            
+            typingIndicator.style.display = 'flex';
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: `Eres Estrella, dueña de "Más que Tecnología" en Santa Cruz, Bolivia. Vendes accesorios tech aesthetic (fundas Bs. 90, cargadores Bs. 145, audífonos Bs. 210). Eres amable, usas muchos emojis y respondes de forma corta. Cliente pregunta: ${userMsg}` }] }]
+                    })
+                });
+
+                const data = await response.json();
+                const botReply = data.candidates?.[0]?.content?.parts?.[0]?.text || "¡Perdón! ✨ ¿Me lo podrías repetir?";
+
+                setTimeout(() => {
+                    typingIndicator.style.display = 'none';
+                    addMessage(botReply, 'bot');
+                }, 800);
+
+            } catch (error) {
+                typingIndicator.style.display = 'none';
+                addMessage("¡Ups! Tuve un problemita técnico. Escríbeme a mi WhatsApp personal ✨", 'bot');
+            }
+        }
+
+        function addMessage(text, side) {
+            const chatBody = document.getElementById('chatBody');
+            const div = document.createElement('div');
+            div.className = `msg msg-${side}`;
+            div.innerText = text;
+            chatBody.appendChild(div);
+            chatBody.scrollTop = chatBody.scrollHeight;
+            chatHistory.push(`${side === 'user' ? 'Cliente' : 'Estrella'}: ${text}`);
+        }
+
+        function contactWhatsApp() {
+            const phone = "59163537033";
+            const summary = chatHistory.join('\n');
+            const text = `¡Hola Estrella! ✨ Estuve hablando con tu bot en la web y tengo algunas dudas. Aquí el resumen:\n\n${summary}`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        window.onload = createBubbles;
+    </script>
+</body>
+</html>
