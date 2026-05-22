@@ -257,10 +257,9 @@
             50%, 100% { background-color: #ebe6ff; }
         }
 
-        /* Contenedor del video responsivo */
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+            padding-bottom: 56.25%; 
             height: 0;
             overflow: hidden;
             border-radius: 20px;
@@ -283,7 +282,6 @@
 
     <div class="bubble-container" id="bubbles"></div>
 
-    <!-- Redes Sociales Flotantes -->
     <div class="social-sidebar">
         <a href="https://facebook.com" target="_blank" class="social-icon bg-facebook" title="Facebook - Mas que Tecnología">
             <i class="fab fa-facebook-f"></i>
@@ -296,7 +294,6 @@
         </a>
     </div>
 
-    <!-- Chat Bot Inteligente -->
     <div class="chat-container">
         <div class="chat-window" id="chatWindow">
             <div class="chat-header">
@@ -335,7 +332,6 @@
         </div>
     </div>
 
-    <!-- Navegación -->
     <nav class="sticky top-4 z-50 mx-4 lg:mx-auto max-w-6xl">
         <div class="glass-card px-8 py-4 flex justify-between items-center shadow-xl shadow-pink-200/40">
             <span class="text-xl md:text-2xl font-bold text-pink-600 uppercase">
@@ -345,6 +341,7 @@
                 <a href="#inicio" class="hover:text-pink-700 transition">Inicio</a>
                 <a href="#video-destacado" class="hover:text-pink-700 transition">Ver Demo</a>
                 <a href="#productos" class="hover:text-pink-700 transition">Tienda</a>
+                <a href="#contacto" class="hover:text-pink-700 transition">Contacto</a>
                 <a href="#sobre-mi" class="hover:text-pink-700 transition">Sobre Mí</a>
             </div>
             <button onclick="toggleChat()" class="bg-pink-300 text-white px-6 py-2 rounded-full font-bold shadow-md hover:scale-105 transition">
@@ -353,7 +350,6 @@
         </div>
     </nav>
 
-    <!-- Inicio -->
     <header id="inicio" class="max-w-7xl mx-auto px-6 py-20">
         <div class="grid lg:grid-cols-2 gap-16 items-center">
             <div class="space-y-6">
@@ -372,7 +368,6 @@
         </div>
     </header>
 
-    <!-- Sección del Video Destacado -->
     <section id="video-destacado" class="py-16 bg-white/20 backdrop-blur-sm">
         <div class="max-w-4xl mx-auto px-6">
             <div class="glass-card p-6 md:p-10 shadow-2xl border-pink-100 text-center space-y-6">
@@ -384,7 +379,6 @@
                     Echa un vistazo a la calidad, el diseño y lo hermosos que se ven nuestros productos en el día a día.
                 </p>
                 
-                <!-- Reproductor de Google Drive incrustado de forma responsiva -->
                 <div class="video-container">
                     <iframe src="https://drive.google.com/file/d/1UpK6LxYk2Ezg0KGtuNm8_950TaK-dsU7/preview" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
@@ -398,7 +392,6 @@
         </div>
     </section>
 
-    <!-- Sobre Mí -->
     <section id="sobre-mi" class="py-20 bg-white/40">
         <div class="max-w-5xl mx-auto px-6">
             <div class="glass-card p-10 flex flex-col md:flex-row items-center gap-10">
@@ -415,12 +408,10 @@
         </div>
     </section>
 
-    <!-- Productos -->
     <section id="productos" class="py-20">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-4xl font-bold text-center text-pink-900 mb-16 uppercase">Favoritos de la Semana</h2>
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Tarjeta Producto 1 -->
                 <div class="glass-card p-6 group">
                     <div class="overflow-hidden rounded-2xl h-60 mb-4 bg-white">
                         <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition" alt="Funda Aesthetic">
@@ -430,7 +421,6 @@
                     <button onclick="toggleChat()" class="w-full mt-4 bg-pink-300 text-white py-3 rounded-xl font-bold hover:bg-pink-400 transition">Preguntar por WhatsApp</button>
                 </div>
                 
-                <!-- Tarjeta Producto 2 -->
                 <div class="glass-card p-6 group">
                     <div class="overflow-hidden rounded-2xl h-60 mb-4 bg-white">
                         <img src="https://images.unsplash.com/photo-1615526675159-e248c3021d3f?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition" alt="Cargador">
@@ -440,7 +430,6 @@
                     <button onclick="toggleChat()" class="w-full mt-4 bg-pink-300 text-white py-3 rounded-xl font-bold hover:bg-pink-400 transition">Preguntar por WhatsApp</button>
                 </div>
 
-                <!-- Tarjeta Producto 3 -->
                 <div class="glass-card p-6 group">
                     <div class="overflow-hidden rounded-2xl h-60 mb-4 bg-white">
                         <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition" alt="Audífonos">
@@ -453,15 +442,38 @@
         </div>
     </section>
 
+    <!-- FORMULARIO DE CONTACTO -->
+    <section id="contacto" class="py-20 bg-pink-100/30">
+        <div class="max-w-2xl mx-auto px-6">
+            <div class="glass-card p-10 shadow-xl">
+                <h2 class="text-3xl font-bold text-pink-900 text-center mb-8">¿Dudas o Pedidos?</h2>
+                <form action="#" method="POST" class="space-y-4">
+                    <div>
+                        <label class="block text-pink-800 font-bold mb-2">Nombre</label>
+                        <input type="text" class="w-full px-4 py-3 rounded-xl border-2 border-pink-100 focus:border-pink-300 outline-none" placeholder="Tu nombre" required>
+                    </div>
+                    <div>
+                        <label class="block text-pink-800 font-bold mb-2">Correo</label>
+                        <input type="email" class="w-full px-4 py-3 rounded-xl border-2 border-pink-100 focus:border-pink-300 outline-none" placeholder="correo@ejemplo.com" required>
+                    </div>
+                    <div>
+                        <label class="block text-pink-800 font-bold mb-2">Mensaje</label>
+                        <textarea class="w-full px-4 py-3 rounded-xl border-2 border-pink-100 focus:border-pink-300 outline-none" rows="4" placeholder="¿Qué necesitas?" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-pink-500 text-white py-4 rounded-xl font-bold hover:bg-pink-600 transition shadow-lg">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <footer class="py-10 text-center text-pink-400 font-bold">
         MÁS QUE TECNOLOGÍA • ESTRELLA • 2026
     </footer>
 
     <script>
-        const apiKey = ""; // API Key de Gemini
+        const apiKey = ""; 
         let chatHistory = [];
 
-        // Burbujas
         function createBubbles() {
             const container = document.getElementById('bubbles');
             for (let i = 0; i < 20; i++) {
@@ -476,7 +488,6 @@
             }
         }
 
-        // Lógica del Chat
         function toggleChat() {
             const win = document.getElementById('chatWindow');
             const dot = document.getElementById('dot');
